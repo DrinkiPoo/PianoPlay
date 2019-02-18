@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Piano</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="pianoStyle.css">
+    </head>
+
+    <body>
+        <h1>DrinkiPoo's Shitpiano</h1>
+
+        <div class="keys">
+            <div data-key="81" class="key">
+            <kbd>Q</kbd>
+            <span class="sound">c</span>
+            </div>
+        
+        <div data-key="87" class="key">
+            <kbd>W</kbd>
+            <span class="sound">c#</span>
+            </div>
+        
+        <div data-key="69" class="key">
+            <kbd>E</kbd>
+            <span class="sound">d</span>
+            </div>
+        
+        <div data-key="82" class="key">
+            <kbd>R</kbd>
+            <span class="sound">d#</span>
+            </div>
+        
+        <div data-key="84" class="key">
+            <kbd>T</kbd>
+            <span class="sound">e</span>
+            </div>
+        
+        <div data-key="89" class="key">
+           <kbd>Y</kbd>
+            <span class="sound">f</span>
+            </div>
+        
+        <div data-key="85" class="key">
+            <kbd>U</kbd>
+            <span class="sound">f#</span>
+            </div>
+        
+        <div data-key="73" class="key">
+            <kbd>I</kbd>
+            <span class="sound">g</span>
+            </div>
+        
+        <div data-key="79" class="key">
+            <kbd>O</kbd>
+            <span class="sound">g#</span>
+            </div>
+
+        <div data-key="80" class="key">
+            <kbd>P</kbd>
+            <span class="sound">a</span>
+        </div>
+
+        <div data-key="219" class="key">
+            <kbd>{</kbd>
+            <span class="sound">a#</span>
+        </div>
+
+        <div data-key="221" class="key">
+            <kbd>}</kbd>
+            <span class="sound">b</span>
+        </div>
+
+        <div data-key="220" class="key">
+            <kbd>|</kbd>
+            <span class="sound">c2</span>
+        </div>
+    </div>
+
+        <audio data-key="81" src="wav/c1.wav"></audio>
+        <audio data-key="87" src="wav/c1s.wav"></audio>
+        <audio data-key="69" src="wav/d1.wav"></audio>
+        <audio data-key="82" src="wav/d1s.wav"></audio>
+        <audio data-key="84" src="wav/e1.wav"></audio>
+        <audio data-key="89" src="wav/f1.wav"></audio>
+        <audio data-key="85" src="wav/f1s.wav"></audio>
+        <audio data-key="73" src="wav/g1.wav"></audio>
+        <audio data-key="79" src="wav/g1s.wav"></audio>
+        <audio data-key="80" src="wav/a1.wav"></audio>
+        <audio data-key="219" src="wav/a1s.wav"></audio>
+        <audio data-key="221" src="wav/b1.wav"></audio>
+        <audio data-key="220" src="wav/c2.wav"></audio>
+        
+
+    <script>
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
+    </body>
+</html>
